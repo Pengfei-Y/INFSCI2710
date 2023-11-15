@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}首页 - Flask Jinja2 示例{% endblock %}
+
+
+
+{% block style %}
+{% endblock %}
+
+{% block body %}
+
+    <div style="padding: 50px"></div>
+
+    <div style="width: 1000px;border-radius: 15px;margin: 0 auto;">
+        <div style="padding: 20px">
+            <h1>userinfo</h1>
+            <form>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">username</label>
+                        <input value="{{ username }}" type="text" class="form-control" id="username">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">password</label>
+                        <input value="{{ password }}" type="text" class="form-control" id="password">
+                    </div>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">name</label>
+                        <input value="{{ name }}" type="text" class="form-control" id="name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">balance</label>
+                        <input readonly value="{{ balance }}" type="text" class="form-control" id="balance">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">email</label>
+                        <input value="{{ email }}" type="email" class="form-control" id="eamil">
+                    </div>
+                    <div class="form-group col-md-6">
+
+                        <label for="exampleFormControlSelect1">userclass</label>
+                        <select class="form-control" id="userclass">
+                            <option {% if user_class == 'that person' %}selected{% endif %}>that person</option>
+                            <option {% if user_class == 'enterprise' %}selected{% endif %}>enterprise</option>
+                        </select>
+
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputAddress">Address</label>
+                    <input value="{{ address }}" type="text" class="form-control" id="address">
+                </div>
+
+
+                <button onclick="user_infos()" type="button" class="btn btn-primary">modify</button>
+            </form>
+
+
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        function user_infos() {
+
+            // get the value of username and password value
+            var username = $("#username").val();
+            var password = $("#password").val();
+            var name = $("#name").val();
+            var eamil = $("#eamil").val();
+            var address = $("#address").val();
+            var userclass = $("#userclass").val();
+
+            // create an object that contains username and password
+            var data = {
+                username: username,
+                password: password,
+                name: name,
+                eamil: eamil,
+                address: address,
+                userclass: userclass,
+
+            };
+            // send post request
+            $.post("/user/userinfo", data, function (response) {
+                // deal with the response
+                if (response == 1) {
+                    alert('Successfully modified')
+                    window.location.href = '/user/userinfo'
+                }
+                if (response == 0) {
+                    alert('Modification failed, code error reported')
+                }
+
+            });
+
+        }
+
+    </script>
+{% endblock %}
+
+

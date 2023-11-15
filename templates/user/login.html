@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}首页 - Flask Jinja2 示例{% endblock %}
+
+
+
+{% block style %}
+{% endblock %}
+
+{% block body %}
+
+    <div style="padding: 50px"></div>
+
+    <div style="width: 500px;border-radius: 15px;margin: 0 auto;background-color: #f8f9fa">
+        <div style="padding: 20px">
+            <h1>login</h1>
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">username</label>
+                    <input type="text" class="form-control" id="username" aria-describedby="emailHelp">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">password</label>
+                    <input type="password" class="form-control" id="password">
+                </div>
+                <button onclick="user_login()" type="button" class="btn btn-primary">Submit</button>
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
+
+{% block script %}
+    <script>
+
+        function user_login() {
+            // get the value of username and password value
+            var username = $("#username").val();
+            var password = $("#password").val();
+            console.log(username)
+            // create an object that contains username and password
+            var data = {
+                username: username,
+                password: password
+            };
+            // send post request
+            $.post("/user/login", data, function (response) {
+                if (response =='1'){
+                    alert('Login succeeded')
+                    window.location.href = '/user/userinfo'
+                }
+                if (response == '0'){
+                    alert('Login failed, password error')
+                }
+            });
+        }
+
+    </script>
+{% endblock %}
+
+

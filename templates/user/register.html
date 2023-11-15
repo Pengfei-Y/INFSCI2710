@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}首页 - Flask Jinja2 示例{% endblock %}
+
+
+
+{% block style %}
+{% endblock %}
+
+{% block body %}
+
+    <div style="padding: 50px"></div>
+
+    <div style="width: 500px;border-radius: 15px;margin: 0 auto;background-color: #f8f9fa">
+        <div style="padding: 20px">
+            <h1>register</h1>
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">username</label>
+                    <input type="text" class="form-control" id="username" aria-describedby="emailHelp">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">password</label>
+                    <input type="password" class="form-control" id="password">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">name</label>
+                    <input type="text" class="form-control" id="name">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">eamil</label>
+                    <input type="email" class="form-control" id="eamil">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword1">address</label>
+                    <input type="text" class="form-control" id="address">
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">userclass</label>
+                    <select class="form-control" id="userclass">
+                        <option>that person</option>
+                        <option>enterprise</option>
+
+                    </select>
+                </div>
+
+
+                <button onclick="user_login()" type="button" class="btn btn-primary">Submit</button>
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
+
+{% block script %}
+    <script>
+
+        function user_login() {
+            // get the value of username and password value
+            var username = $("#username").val();
+            var password = $("#password").val();
+            var name = $("#name").val();
+            var eamil = $("#eamil").val();
+            var address = $("#address").val();
+            var userclass = $("#userclass").val();
+
+            // create an object that contains username and password
+            var data = {
+                username: username,
+                password: password,
+                name: name,
+                eamil: eamil,
+                address: address,
+                userclass: userclass,
+
+            };
+            // send post request
+            $.post("/user/register", data, function (response) {
+                // deal with the response
+                if(response==1){
+                    alert('login was successful')
+                }
+                if(response==0){
+                    alert('login has failed')
+                }
+
+            });
+        }
+
+    </script>
+{% endblock %}
+
+

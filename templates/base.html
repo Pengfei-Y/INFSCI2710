@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}web{% endblock %}</title>
+    <script src="https://cdn.bootcss.com/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
+    {% block style %}{% endblock %}
+</head>
+<body style="margin: 0 auto">
+
+
+<div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                       aria-expanded="false">
+                        user
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/user/login">login</a>
+                        <a class="dropdown-item" href="/user/register">register</a>
+                        <a class="dropdown-item" href="/user/userinfo">userinfo</a>
+                    </div>
+                </li>
+
+
+            </ul>
+
+        </div>
+    </nav>
+</div>
+
+
+{% block body %}{% endblock %}
+{% block script %}{% endblock %}
+
+</body>
+</html>
